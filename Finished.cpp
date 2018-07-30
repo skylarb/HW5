@@ -202,7 +202,6 @@ bool skiplist::contains(int &s_value)
         Winner_name = x->name;
     }
 
-    cout << " bugg 1" << endl;
     if((x == NULL) || (x->value != s_value))
         return false;
     else
