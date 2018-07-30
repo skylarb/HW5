@@ -37,7 +37,7 @@ public:
     Node* createNode(int, int);   // creating a new node
     void insertElement(int);      // our insert function
     void displayList();           // print function
-    void Delete(int);
+    void Delete(int n);
 };
 
 skiplist::skiplist(int MAXLVL, float P) {
@@ -74,11 +74,41 @@ void skiplist::insertElement(int key){
 
 
 void skiplist::displayList(){
+
 // add display code
 };
 
-void skiplist::Delete(int) {
+void skiplist::Delete(int n) {
     //add delete code here
+	Node* ptr = header;
+	Node* update[MAXLVL+1];
+	memset(update, 0, sizeof(Node*)*(MAXLVL+1));
+
+	for(int i = level; i >= 0; i--)
+	{
+	    while(ptr->next != NULL && ptr->next[i]->value < n)
+	        ptr = ptr->next[i];
+	    update[i] = ptr;
+	}
+
+	ptr = ptr->next[0];
+
+	if(ptr != NULL && ptr=>value ==n)
+	{
+		for(int i = 0; i<= level; i++)
+		{
+	    	if(update[i]->next[i] != ptr)
+			break;
+	    	update[i]->next[i] = current->next[i];
+		}
+
+		while(level>0 && head->next[level] == 0)
+	    		level--;
+
+		cout << "Successfully deleted " << n << endl;
+
+	}
+
 };
 
 
