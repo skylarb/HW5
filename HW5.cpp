@@ -1,82 +1,91 @@
 #include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <cmath>
 #include <cstring>
-
+#include <ctime>
+#define MAX_LEVEL 6
+const float P = 0.5;
 using namespace std;
+string Winner_name;
 
-class Node
+//===================================================
+//Skip Node Declaration
+//===================================================
+class skipNode
 {
 public:
-    int key;
-    Node ** forward;
-    Node(int,int);
-}
-Node::Node(int key, int level) {
-    this->key = key;
-    //memory to forward
-    forward = new Node*[level + 1];
-    memset(forward, 0, sizeof(Node) * (level + 1));
+    int value;
+    string name;
+    skipNode **forward;
+    skipNode(int level, int &value, string &name);
+    ~skipNode();
 };
-
-class skiplist{
-    // max level for this skiplist
-    int MAXLVL;
-
-
-    // P is the fraction of the nodes with level
-    // i pointers also having level i+1 pointers
-    float P;
-
-    // current level of skip list
+//===================================================
+//Skip List Declaration
+//===================================================
+class skiplist
+{
+public:
+    skipNode *header;
+    int value;
     int level;
+    string name;
+    skiplist();
+    ~skiplist();
 
-    // pointer to header node
-    Node *header;
-public:
-    skiplist(int, float);
-    int randomLevel();            // probability part of the program
-    Node* createNode(int, int);   // creating a new node
-    void insertElement(int);      // our insert function
-    void displayList();           // print function
-    void Delete(int n);
+    void display();
+    bool contains(int &);
+    void insert_element(int &value, string &name);
+    void delete_element(int &);
 };
 
-skiplist::skiplist(int MAXLVL, float P) {
-    this->MAXLVL = MAXLVL;
-    this->P = P;
+//==================================================
+//Skip Node Constructor & Destructor
+//==================================================
+skipNode::skipNode(int level, int &value, string &name)
+{
+    forward = new skipNode * [level + 1];
+    memset(forward, 0, sizeof(skipNode*) * (level + 1));
+    this->value = value;
+    this->name  = name;
+}
+
+skipNode::~skipNode()
+{
+    delete [] forward;
+}
+
+//==================================================
+//SkipList Constructor & destructor
+//==================================================
+skiplist::skiplist()
+{
+    header = new skipNode(MAX_LEVEL, value, name);
     level = 0;
-
-    // create header node and initialize key to -1
-    header = new Node(-1, MAXLVL);
 }
-int skiplist::randomLevel()
+skiplist::~skiplist()
 {
-    float r = (float)rand()/RAND_MAX;
-    int lvl = 0;
-    while (r < P && lvl < MAXLVL)
-    {
-        lvl++;
-        r = (float)rand()/RAND_MAX;
-    }
-    return lvl;
-};
+    delete header;
+}
 
-// create new node
-Node* skiplist::createNode(int key, int level)
+
+//==================================================
+//Random Value Generator
+//==================================================
+float frand()
 {
-    Node *n = new Node(key, level);
-    return n;
-};
-
-void skiplist::insertElement(int key){
-    //add insert code
+    return (float) rand() / RAND_MAX;
 }
 
 
 
-void skiplist::displayList(){
 
-// add display code
-};
+
+
+
+
+
 
 void skiplist::Delete(int n) {
     //add delete code here
@@ -110,14 +119,6 @@ void skiplist::Delete(int n) {
 	}
 
 };
-
-
-
-
-
-
-
-
 
 int main(){
 
