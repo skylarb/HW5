@@ -138,36 +138,36 @@ void skiplist::insert_element(int &value, string &name)
 
 void skiplist::Delete(int n) {
     //add delete code here
-	Node* ptr = header;
-	Node* update[MAXLVL+1];
+	skipNode* ptr = header;
+	skipNode* update[MAXLVL+1];
 	memset(update, 0, sizeof(Node*)*(MAXLVL+1));
 
 	for(int i = level; i >= 0; i--)
 	{
-	    while(ptr->next != NULL && ptr->next[i]->value < n)
-	        ptr = ptr->next[i];
+	    while(ptr->forward != NULL && ptr->forward[i]->value < n)
+	        ptr = ptr->forward[i];
 	    update[i] = ptr;
 	}
 
-	ptr = ptr->next[0];
+	ptr = ptr->forward[0];
 
 	if(ptr != NULL && ptr=>value ==n)
 	{
 		for(int i = 0; i<= level; i++)
 		{
-	    	if(update[i]->next[i] != ptr)
+	    	if(update[i]->forward[i] != ptr)
 			break;
-	    	update[i]->next[i] = current->next[i];
+	    	update[i]->forward[i] = current->forward[i];
 		}
 
-		while(level>0 && head->next[level] == 0)
+		while(level>0 && head->forward[level] == 0)
 	    		level--;
 
 		cout << "Successfully deleted " << n << endl;
 
 	}
 
-};
+}
 
 bool skiplist::contains(int &n)
 {
