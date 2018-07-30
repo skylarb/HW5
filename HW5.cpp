@@ -78,6 +78,20 @@ float frand()
     return (float) rand() / RAND_MAX;
 }
 
+//===================================================
+//Random Level Generator
+//===================================================
+int random_level()
+{
+    static bool first = true;
+    if (first)
+    {
+        srand((unsigned)time(NULL));
+        first = false;
+    }
+    int lvl = (int)(log(frand()) / log(1.-P));
+    return (lvl < MAX_LEVEL ? lvl : MAX_LEVEL);
+}
 
 //====================================================
 //Insert Element in Skip List
