@@ -120,13 +120,80 @@ void skiplist::Delete(int n) {
 
 };
 
-int main(){
+//===================================================
+//Main
+//===================================================
+
+int main()
+{
+    skiplist sl;
+    int choice, num;
+    string name = " ";
+    string filename = " ";
+
+    do
+    {
+        PrintMenu();
+        choice = GetChoice();
+
+        switch(choice)
+        {
+            case 1:{
+                cout << "Enter the number and name to be inserted: ";
+                cin >> num;
+                cin >> name;
+                sl.insert_element(num, name);
+                if(sl.contains(num))
+                    cout << "contestant has been entered to the pool!" << endl;
+                break;}
+            case 2:{
+                cout << "Enter the file of contestants you wish to read from" << endl;
+                cin >> filename;
+                ifstream din(filename.c_str());
+                if(!din)
+                {
+                    cerr << "Could not open " << filename << endl;
+                }
+                while(din >> num >> name)
+                {
+                    sl.insert_element(num, name);
+                }
+                break;}
+            case 3:{
+                cout << "Enter the number corresponding to the name you wish to remove from the pool: ";
+                cin >> num;
+                if(!sl.contains(num))
+                {
+                    cout << "Name has not been found not found" << endl;
+                    break;
+                }
+                sl.delete_element(num);
+                cout << "Contestant has been deleted" << endl;
+                break;}
+            case 4:{
+                cout << "Search for the luck winners number: ";
+                num = rand() % 999999;
+                cout << num << endl;
+                cin >> num;
+                if(sl.contains(num))
+                    cout << "With the number " << num << ", " << Winner_name << " has won!!" <<  endl;
+                else
+                    cout << "Unfortunately no winner has been found." << endl;
+                    break;}
+            case 5:{
+                cout << "The lottery pool, with selected numbers/names is: ";
+                sl.display();
+                break;}
+            case 6:{
+                cout << endl << "===================" << endl;
+                cout << "    Thank you for playing everyone!    " << endl;
+                cout << "===================" << endl;
+                break;}
+            default:
+                cout << "Wrong Choice" << endl;
+        }
+    }while(choice != 6);
 
 
-cout << "hello world" << endl;
-
-
-
-
-
-};
+    return 0;
+}
