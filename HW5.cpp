@@ -79,7 +79,42 @@ float frand()
 }
 
 
-
+//====================================================
+//Insert Element in Skip List
+//====================================================
+void skiplist::insert_element(int &value, string &name)
+{
+    skipNode *x = header;
+    skipNode *update[MAX_LEVEL + 1];
+    memset(update, 0, sizeof(skipNode*) * (MAX_LEVEL + 1));
+    for (int i = level; i >= 0; i--)
+    {
+        while (x->forward[i] != NULL && x->forward[i]->value < value)
+        {
+            x = x->forward[i];
+        }
+        update[i] = x;
+    }
+    x = x->forward[0];
+    if (x == NULL || x->value != value)
+    {
+        int lvl = random_level();
+        if (lvl > level)
+        {
+            for (int i = level + 1; i <= lvl; i++)
+            {
+                update[i] = header;
+            }
+            level = lvl;
+        }
+        x = new skipNode(lvl, value, name);
+        for (int i = 0; i <= lvl; i++)
+        {
+            x->forward[i] = update[i]->forward[i];
+            update[i]->forward[i] = x;
+        }
+    }
+}
 
 
 
