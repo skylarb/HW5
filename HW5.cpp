@@ -120,6 +120,47 @@ void skiplist::Delete(int n) {
 
 };
 
+
+
+
+//===================================================
+//Print Menu
+//===================================================
+void PrintMenu()
+{
+    cout << endl << "=======================" << endl;
+    cout << "Operations on lottery R us" << endl;
+    cout << "=======================" << endl << endl;
+    cout << "1.Insert Contestant" << endl;
+    cout << "2.Insert File of Contestants" << endl;
+    cout << "3.Delete contestant by Number" << endl;
+    cout << "4.Search for a Winner!" << endl;
+    cout << "5.Display Pool of Contestants " << endl;
+    cout << "6.Exit " << endl << endl;
+}
+
+//-----------------------------------------------------------------------
+//Name: GetChoice
+//Purpose: Gets the choice and error checks
+//----------------------------------------------------------------------
+int GetChoice()
+{
+    char choice;  // read the input into a character for safety
+    int intChoice;
+
+    do
+    {
+        cout << "Choose what to do next: ";
+        cin >> choice;
+    } while (choice < '0' || choice > '9');
+
+    // convert the character to an integer and return it
+    intChoice = choice - '0';
+    return (intChoice);
+}
+
+
+
 //===================================================
 //Main
 //===================================================
