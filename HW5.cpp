@@ -169,6 +169,28 @@ void skiplist::Delete(int n) {
 
 };
 
+bool skiplist::contains(int &n)
+{
+	skipNode* ptr = header;
+	skipNode* nxt = header;
+	for(int i = level; i >= 0; i--)
+	{
+		nxt = ptr->forward[i];
+		while(nxt->value < n)
+		{
+		    ptr = nxt;
+		    nxt = nxt->forward[i];
+		}
+	}
+	ptr = ptr->forward[0];
+	if(ptr->value ==n)
+		return true;
+	else
+		return false;
+
+}
+
+
 
 
 
