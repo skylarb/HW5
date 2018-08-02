@@ -1,9 +1,15 @@
 Function roles
 
 Tomas Stevens
+Added GetChoice Function
+Added PrintMenu Function
+Added Main Function
+Added Headers
+Added Basic Constructors
+Created Roles file
 
 Skylar B
-created Licence
+Created Licence
 Edited Delete Function
 Removed the debugging text
 added the random level generator
@@ -13,6 +19,8 @@ Natalie Bostwick
 Added Contains Function
 Changed Variable names in Delete Function
 Added Delete Function
+Report
 
-sebastian
+Sebastian
+Recorder/Commentator
 
